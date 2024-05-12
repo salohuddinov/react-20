@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,11 +7,15 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
+import axios from '../../api';
 import "./Header.css"
 import logo from '../../images/logo.svg'
 import person from '../../images/person.png'
 import shop from '../../images/shop.png'
 import { FaRegHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import Serchbtm from '../serchbtm/Serchbtm';
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,33 +61,69 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+    const [value, setValue] = useState("")
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        if (!value.trim()) return
+        axios
+            .get(`/products/search?q=${value.trim()}`)
+            .then(res => setData(res.data.products))
+            .catch(err => console.log(err))
+    }, [value])
+
+    const wishes = useSelector((state) => state.wishlist.value);
+    const carts = useSelector((state) => state.cart.value);
     return (
         <AppBar className='header__bg'>
             <div className="container">
                 <Toolbar className='nav__item'>
                     <IconButton>
-                        <img src={logo} alt="" />
+                        <Link to={'/'}><img src={logo} alt="" /></Link>
                     </IconButton>
                     <Typography className='nav__link'>
-                        <h3>Home</h3>
-                        <h3>Brands</h3>
-                        <h3>Recent Products</h3>
-                        <h3>Contact</h3>
-                        <h3>About</h3>
+                        <Link to={'/'}><h3>Home</h3></Link>
+                        <Link to={'/brands'}><h3>Brands</h3></Link>
+                        <Link to={'/recent'}><h3>Recent Products</h3></Link>
+                        <Link to={'/contact'}> <h3>Contact</h3></Link>
+                        <Link to={'/about'}><h3>About</h3></Link>
                     </Typography>
                     <div className="header__right">
-                        <Search>
+                        <Search className='serch'>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
                             <StyledInputBase
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
+                                value={value}
+                                onChange={e => setValue(e.target.value)}
                             />
+                            {
+                                value.trim() ? <Serchbtm data={data} /> : <></>
+                            }
                         </Search>
                         <img src={person} alt="" />
-                        <img src={shop} alt="" />
-                        <Link to={"/wishlist"}><FaRegHeart className='header__right__img' /></Link>
+                        <Link to={'/cart'}>
+                            <img src={shop} alt="" />
+                            {carts.length > 0 ? (
+                                <sup>
+                                    <p className='sup__p'>{carts.length}</p>
+                                </sup>
+                            ) : (
+                                <></>
+                            )}
+                        </Link>
+                        <Link to={"/wishlist"}>
+                            <FaRegHeart className='header__right__img' />
+                            {wishes.length > 0 ? (
+                                <sup>
+                                    <p className='sup__p'>{wishes.length}</p>
+                                </sup>
+                            ) : (
+                                <></>
+                            )}
+                        </Link>
                     </div>
                 </Toolbar>
             </div>

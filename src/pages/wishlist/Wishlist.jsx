@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "../../api";
 import { useSelector } from "react-redux";
 import Product from "../../components/product/Product";
+import wish from '../../images/wishlist.png'
 
 const Wishlist = () => {
   const wishes = useSelector((state) => state.wishlist.value);
@@ -21,7 +22,7 @@ const Wishlist = () => {
       {wishes.length ? (
         <Product title="Wishlist" data={wishes} />
       ) : (
-        <h2>empty</h2>
+        <img className="wish" src={wish} alt="" />
       )}
       <br />
       <br />

@@ -21,22 +21,29 @@
     line-height: 44px;
     letter-spacing: 0%;
     text-align: center;
+    margin: 20px auto;
+    margin-top: 0;
+    margin-bottom: 35px;
 }
 
 .product__wrapper {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin: 10px auto;
+    gap: 15px;
     justify-content: space-between;
 }
 
 .cardd {
     width: 300px;
-    height: 440px;
+    height: 390px;
     border-radius: 15px;
     border: 1px solid #ddd;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    box-shadow: 0 0 15px 0 #ddd;
 }
 
 .image {
@@ -129,11 +136,39 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     padding: 0 20px;
-    color: rgb(250, 1, 1);
+    color: rgb(30, 29, 29);
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 36px;
     letter-spacing: 0%;
     text-align: center;
+}
+
+.costm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.costm h5 {
+    color: rgb(139, 142, 153);
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 120.5%;
+    letter-spacing: 0%;
+    text-align: right;
+}
+
+.costm h3 {
+    color: rgb(0, 0, 0);
+    font-family: Poppins;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 120.5%;
+    letter-spacing: 0%;
+    text-align: left;
 }

@@ -5,6 +5,9 @@ import Home from './pages/home/Home'
 import Single from './pages/single/Single'
 import Header from './components/header/Header'
 import Wishlist from './pages/wishlist/Wishlist'
+import Cart from './pages/cart/Cart'
+import Footer from './components/footer/Footer'
+import not from './images/not.png'
 
 function App() {
 
@@ -14,9 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/single/:id" element={<Single />} />
-        <Route path='*' element={<h2>empty</h2>} />
+        <Route path='*' element={<img className='notempty' src={not} alt="" />} />
       </Routes>
+      <Footer />
     </>
   )
 }

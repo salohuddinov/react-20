@@ -3,12 +3,17 @@ import Hero from '../../components/hero/Hero'
 import Section from '../../components/section/Section'
 import Product from '../../components/product/Product'
 import axios from "../../api";
-// import Skeleton from "../../components/skeleton/Skeleton"; // Update the path to your Skeleton component
+import Footerbr from "../../components/footerbr/Footerbr";
+import Footerbanner from "../../components/footerbanner/Footerbanner";
 
 const Home = () => {
     const [data, setData] = useState([]);
-    const [count, setCount] = useState(4);
+    const [count, setCount] = useState(8);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
 
     useEffect(() => {
@@ -29,7 +34,12 @@ const Home = () => {
         <>
             <Hero />
             <Section />
-            <Product title="BEST SELLER" data={data} />
+            <Product data={data} />
+            <div className="container">
+                <button onClick={() => setCount(p => p + 4)} className='btn-see'>See more</button>
+            </div>
+            <Footerbr />
+            <Footerbanner />
         </>
     )
 }

@@ -1,23 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from "react"
 import './Product.css'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleToWishes } from "../../context/wishlistSlice";
 import { addToCart } from "../../context/cartSlice";
-
+import { API_URL } from "../../static"
+import axios from "../../api"
+import Skeleton from '../skeleton/Skeleton'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import Star from '../star/Star'
 
-const Product = ({ data, title }) => {
+const Product = ({ data }) => {
+    const [count, setCount] = useState(4)
+    const [loading, setLoading] = useState(false)
+    const [categoryValue, setCategoryValue] = useState("all")
+
     const dispatch = useDispatch();
     const wishes = useSelector((state) => state.wishlist.value);
     const cart = useSelector((state) => state.cart.value);
 
-    if (!data) {
-        return <h2>loding</h2>;
-    }
+    useEffect(() => {
+        axios
+            .get(`${API_URL}/categories`)
+            .then(res => setCategories(res.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        setLoading(true)
+        let url = categoryValue === "all" ?
+            `${API_URL}?limit=${count}` :
+            `${API_URL}/category/${categoryValue}?limit=${count}`
+        axios
+            .get(url)
+            .then(res => setData(res.data))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+    }, [count, categoryValue])
+
 
     let products = data?.map((el) => (
         <div key={el.id} className="cardd">
@@ -43,14 +66,16 @@ const Product = ({ data, title }) => {
                 </span>
             </div>
             <Link to={`/single/${el.id}`}>
-                <h2 className='title'>{el.title}</h2>
+                <h4 className='title'>{el.title}</h4>
             </Link>
-            <div className="prices">
-                <h2>${el.price}</h2>
-                <h4>$534.33</h4>
+            <Star />
+            <div className="costm">
+                <h5>$534.33</h5>
+                <h3>${el.price}</h3>
             </div>
         </div>
     ));
+
 
     return (
         <>
@@ -58,10 +83,8 @@ const Product = ({ data, title }) => {
                 <div className="product">
                     <h3>Find your favourite smart watch.</h3>
                     <h2>Our Latest Products</h2>
-                    <h2>{title}</h2>
-                    <div className="product__wrapper">
-                        {products}
-                    </div>
+                    {loading && <Skeleton />}
+                    <div className="product__wrapper">{products}</div>
                 </div>
             </div>
         </>

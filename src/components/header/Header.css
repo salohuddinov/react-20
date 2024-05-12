@@ -42,6 +42,10 @@
     margin: 10px 0;
 }
 
+.serch {
+    position: relative;
+}
+
 @media screen and (max-width: 900px) {
     .nav__link {
         display: none;

@@ -147,3 +147,35 @@ body {
     transform: rotateX(-60deg) rotateY(0deg) rotateZ(360deg);
   }
 }
+
+.btn-see {
+  display: flex;
+  margin: 22px auto;
+  width: 100%;
+  max-width: 196px;
+  height: 46px;
+  border-radius: 15px;
+  background: #000;
+  color: rgb(255, 255, 255);
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0%;
+  padding: 10px 52px;
+}
+
+.notempty {
+  display: flex;
+  margin: 77px auto;
+  width: 69%;
+}
+
+.wish {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 0px;
+  margin-top: 100px;
+  width: 100%;
+  max-width: 500px;
+}
