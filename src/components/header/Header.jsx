@@ -103,27 +103,29 @@ export default function Header() {
                                 value.trim() ? <Serchbtm data={data} /> : <></>
                             }
                         </Search>
-                        <img src={person} alt="" />
-                        <Link to={'/cart'}>
-                            <img src={shop} alt="" />
-                            {carts.length > 0 ? (
-                                <sup>
-                                    <p className='sup__p'>{carts.length}</p>
-                                </sup>
-                            ) : (
-                                <></>
-                            )}
-                        </Link>
-                        <Link to={"/wishlist"}>
-                            <FaRegHeart className='header__right__img' />
-                            {wishes.length > 0 ? (
-                                <sup>
-                                    <p className='sup__p'>{wishes.length}</p>
-                                </sup>
-                            ) : (
-                                <></>
-                            )}
-                        </Link>
+                        <div className="icn">
+                            <img className='header__right__img' src={person} alt="" />
+                            <Link to={'/cart'}>
+                                <img className='header__right__img' src={shop} alt="" />
+                                {carts.length > 0 ? (
+                                    <sup>
+                                        <p className='sup__p'>{carts.length}</p>
+                                    </sup>
+                                ) : (
+                                    <></>
+                                )}
+                            </Link>
+                            <Link to={"/wishlist"}>
+                                <FaRegHeart className='header__right__img' />
+                                {wishes.length > 0 ? (
+                                    <sup>
+                                        <p className='sup__p'>{wishes.length}</p>
+                                    </sup>
+                                ) : (
+                                    <></>
+                                )}
+                            </Link>
+                        </div>
                     </div>
                 </Toolbar>
             </div>

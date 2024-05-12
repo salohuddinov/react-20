@@ -133,6 +133,17 @@ const Cart = () => {
     </div>
   ));
 
+  const cartItemtop = (
+    <div className="cartd">
+      <h2>PRODUCT</h2>
+      <div className="cartd__right">
+        <h2>PRICE</h2>
+        <h2>QTY</h2>
+        <h2>UNIT PRICE</h2>
+      </div>
+    </div>
+  );
+
   const cardContent =
     (<div div className="card__content" >
       <div className="content__right">
@@ -203,20 +214,12 @@ const Cart = () => {
     cartContent = (<img className="wish" src={not} alt="" />
     );
   } else {
-    cartContent = <div className="carts">{cartItems} {cardContent}</div>;
+    cartContent = <div className="carts">{cartItemtop} {cartItems} {cardContent}</div>;
   }
 
   return (
     <div className="container">
       <div className="cart">
-        <div className="cartd">
-          <h2>PRODUCT</h2>
-          <div className="cartd__right">
-            <h2>PRICE</h2>
-            <h2>QTY</h2>
-            <h2>UNIT PRICE</h2>
-          </div>
-        </div>
         {cartContent}
       </div>
       <Product data={data.slice(0, 4)} />
