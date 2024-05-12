@@ -11,11 +11,6 @@ const Serchbtm = ({ data }) => {
         <>
             <div className="container">
                 <div className="navbar__serch__rezalt">
-                    {!data.length ?
-                        <h3 className='malumot'>Malumot topilmadi</h3>
-                        :
-                        <></>
-                    }
                     {serchItem}
                 </div>
             </div>
